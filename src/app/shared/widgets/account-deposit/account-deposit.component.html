@@ -1,0 +1,20 @@
+<div class="account-action-tab">
+  <div *ngIf="depositFormGroup" [formGroup]="depositFormGroup">
+
+    <mat-form-field>
+      <input matInput
+             type="number"
+             formControlName="depositAmount"
+             placeholder="Enter Amount">
+      <span matTextPrefix>$&nbsp;</span>
+      <mat-error *ngIf="depositFormGroup.invalid">{{getDepositGroupErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="primary"
+            class="account-action-button"
+            (click)="depositButtonClicked()"
+            [disabled]="!depositFormGroup.valid || depositFormGroup.controls['depositAmount'].value < 1">Deposit
+    </button>
+  </div>
+</div>

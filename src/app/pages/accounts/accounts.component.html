@@ -1,0 +1,12 @@
+<div>
+  <h2>Accounts</h2>
+  <button mat-raised-button color="primary" (click)="createAccount()">Create Account</button>
+</div>
+<ng-container *ngFor="let account of accounts">
+  <app-account-view [account]="account"
+                    (depositToAccount)="onAccountDeposit(account, $event)"
+                    (withdrawFromAccount)="onAccountWithdraw(account, $event)"
+                    (deleteAccount)="onAccountDelete(account)"
+  ></app-account-view>
+</ng-container>
+

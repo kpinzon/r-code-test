@@ -1,0 +1,19 @@
+<div class="account-action-tab">
+  <div *ngIf="withdrawalFormGroup" [formGroup]="withdrawalFormGroup">
+
+    <mat-form-field>
+      <input matInput
+             type="number"
+             formControlName="withdrawalAmount"
+             placeholder="Enter Amount">
+      <span matTextPrefix>$&nbsp;</span>
+      <mat-error *ngIf="withdrawalFormGroup.invalid">{{getWithdrawGroupErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="primary"
+            class="account-action-button"
+            (click)="withdrawButtonClicked()"
+            [disabled]="!withdrawalFormGroup.valid || withdrawalFormGroup.controls['withdrawalAmount'].value < 1">Withdraw</button>
+  </div>
+</div>

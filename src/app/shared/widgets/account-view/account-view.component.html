@@ -1,0 +1,32 @@
+<div *ngIf="account" class="account-container">
+  <span>id: {{account.id}}</span>
+  <span>balance: {{account.balance | currency}}</span>
+  <mat-tab-group>
+    <mat-tab label="Deposit">
+      <ng-container *ngTemplateOutlet="deposit"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Withdraw">
+      <ng-container *ngTemplateOutlet="withdrawal"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Account Maintenance">
+      <ng-container style="height: 100px" *ngTemplateOutlet="maintenance"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<ng-template #deposit>
+  <app-account-deposit (depositEvent)="depositToAccount.emit($event)"></app-account-deposit>
+</ng-template>
+
+<ng-template #withdrawal>
+  <app-account-withdrawal [accountBalance]="account?.balance"
+                          (withdrawEvent)="withdrawFromAccount.emit($event)"></app-account-withdrawal>
+</ng-template>
+
+<ng-template #maintenance>
+  <div class="account-action-tab">
+    <button mat-raised-button color="primary" (click)="deleteAccount.emit()">Delete Account</button>
+  </div>
+</ng-template>
